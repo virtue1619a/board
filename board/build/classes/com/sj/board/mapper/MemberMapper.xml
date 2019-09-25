@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sj.board.mapper.MemberMapper">
+	<!-- 회원가입 -->
+	<insert id="addMember" parameterType="com.sj.board.domain.MemberVO">
+		insert into member
+		values('M'||m_code.nextval, #{m_id}, #{m_pw}, #{m_name}, systimestamp)
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="getMember" resultType="com.sj.board.domain.MemberVO">
+		select *
+		from member
+		where m_id = #{inputId}
+	</select>
+	
+	<!-- 게시글 작성자 불러오기 -->
+	<select id="getM_name" resultType="String">
+		select m_name
+		from member
+		where m_code = #{m_code}
+	</select>
+	
+	<!-- 회원 목록 불러오기 -->
+	<select id="getMemberList" resultType="com.sj.board.domain.MemberVO">
+		select *
+		from member
+	</select>
+</mapper>
